@@ -1,0 +1,10 @@
+for f1 in *read1.fastq.gz 
+do
+        f2=${f1%%read1.fastq.gz}read2.fastq.gz"
+        trim_galore --illumina --paired --fastqc -o trim_galore/ $f1 $f2 
+done
+
+for f1 in *read1.fastq.gz; do
+  pattern = echo $f1 | cut -f 1 -d "."
+  trim_galore --clip_R1 13 --clipR2 13 --three_prime_clip_R1 2 --three_prime_clip_R2 2 -q 20 - length 52 --paired --trim1 --fastqc $pattern.read1.fq.gz $pattern.read2.fq.gz 
+done
